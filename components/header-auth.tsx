@@ -30,16 +30,16 @@ export default async function AuthButton() {
               disabled
               className="opacity-75 cursor-none pointer-events-none"
             >
-              <Link href="/sign-in">Sign in</Link>
+              <Link href="/sign-in">Entrar</Link>
             </Button>
             <Button
               asChild
               size="sm"
               variant={"default"}
               disabled
-              className="opacity-75 cursor-none pointer-events-none"
+              className="opacity-75 bg-transparent border-[1px] border-white cursor-none pointer-events-none"
             >
-              <Link href="/sign-up">Sign up</Link>
+              <Link href="/sign-up">Criar conta</Link>
             </Button>
           </div>
         </div>
@@ -47,21 +47,31 @@ export default async function AuthButton() {
     );
   }
   return user ? (
-    <div className="flex items-center gap-4">
-      Hey, {user.email}!
+    <div className="w-full flex text-white font-semibold text-lg items-center justify-between mt-10">
+      <h1> Olá, {user.email}!</h1>
       <form action={signOutAction}>
-        <Button type="submit" variant={"outline"}>
-          Sign out
+        <Button className="text-black" type="submit" variant={"outline"}>
+          Sair
         </Button>
       </form>
     </div>
   ) : (
-    <div className="flex gap-2">
-      <Button asChild size="sm" variant={"outline"}>
-        <Link href="/sign-in">Sign in</Link>
+    <div className="w-full flex mt-10  gap-4">
+      <Button
+        className="ml-auto p-5  cursor-pointer "
+        asChild
+        size="sm"
+        variant={"outline"}
+      >
+        <Link href="/sign-in">Entrar</Link>
       </Button>
-      <Button asChild size="sm" variant={"default"}>
-        <Link href="/sign-up">Sign up</Link>
+      <Button
+        asChild
+        size="sm"
+        className=" bg-transparent border-[1px] p-5 border-white cursor-pointer "
+        variant={"default"}
+      >
+        <Link href="/sign-up ">Criar conta</Link>
       </Button>
     </div>
   );
