@@ -5,6 +5,8 @@ const errorTranslations: { [key: string]: string } = {
   "Password is too short": "A senha é muito curta",
   "Unable to validate email address: invalid format":
     "Endereço de e-mail inválido",
+  "Thanks for signing up! Please check your email for a verification link":
+    "Obrigado por se inscrever! Por favor, verifique seu e-mail para um link de verificação",
 
   // Add more translations as needed
 };

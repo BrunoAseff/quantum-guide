@@ -11,27 +11,25 @@ export default async function ResetPassword({
 }) {
   return (
     <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4">
-      <h1 className="text-2xl font-medium">Reset password</h1>
+      <h1 className="text-2xl font-medium">Trocar senha</h1>
       <p className="text-sm text-foreground/60">
-        Please enter your new password below.
+        Insira a sua nova senha abaixo.
       </p>
-      <Label htmlFor="password">New password</Label>
+      <Label htmlFor="password">Nova senha</Label>
       <Input
         type="password"
         name="password"
-        placeholder="New password"
+        placeholder="Nova senha"
         required
       />
-      <Label htmlFor="confirmPassword">Confirm password</Label>
+      <Label htmlFor="confirmPassword">Confirmar senha</Label>
       <Input
         type="password"
         name="confirmPassword"
-        placeholder="Confirm password"
+        placeholder="Confirmar senha"
         required
       />
-      <SubmitButton formAction={resetPasswordAction}>
-        Reset password
-      </SubmitButton>
+      <SubmitButton formAction={resetPasswordAction}>Trocar senha</SubmitButton>
       <FormMessage message={searchParams} />
     </form>
   );

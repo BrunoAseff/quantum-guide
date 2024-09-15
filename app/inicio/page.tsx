@@ -70,7 +70,7 @@ export default async function ProtectedPage() {
           </filter>
         </defs>
         {/* Estrelas */}
-        <Link href="/dashboard/intro">
+        <Link href="/inicio/intro">
           <circle
             cx="10%"
             cy="40%"
@@ -78,7 +78,7 @@ export default async function ProtectedPage() {
             className="fill-white transition-colors duration-300 hover:cursor-pointer "
           />
         </Link>
-        <Link href="/dashboard/principios-fundamentais">
+        <Link href="/inicio/principios-fundamentais">
           <circle
             cx="20%"
             cy="30%"
@@ -86,7 +86,7 @@ export default async function ProtectedPage() {
             className="fill-white transition-colors duration-300 hover:cursor-pointer "
           />
         </Link>
-        <Link href="/dashboard/interpretacoes">
+        <Link href="/inicio/interpretacoes">
           <circle
             cx="30%"
             cy="50%"
@@ -94,7 +94,7 @@ export default async function ProtectedPage() {
             className="fill-white transition-colors duration-300 hover:cursor-pointer "
           />
         </Link>
-        <Link href="/dashboard/particulas">
+        <Link href="/inicio/particulas">
           <circle
             cx="40%"
             cy="35%"
@@ -102,7 +102,7 @@ export default async function ProtectedPage() {
             className="fill-white transition-colors duration-300 hover:cursor-pointer "
           />
         </Link>
-        <Link href="/dashboard/campos-e-forcas">
+        <Link href="/inicio/campos-e-forcas">
           <circle
             cx="50%"
             cy="25%"
@@ -110,7 +110,7 @@ export default async function ProtectedPage() {
             className="fill-white transition-colors duration-300 hover:cursor-pointer "
           />
         </Link>
-        <Link href="/dashboard/topicos-avancados">
+        <Link href="/inicio/topicos-avancados">
           <circle
             cx="60%"
             cy="55%"

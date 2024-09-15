@@ -16,6 +16,7 @@
     "autoprefixer": "10.4.17",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "embla-carousel-react": "^8.3.0",
     "geist": "^1.2.1",
     "lucide-react": "^0.436.0",
     "next": "latest",
@@ -23,6 +24,7 @@
     "phosphor-react": "^1.4.1",
     "prettier": "^3.3.3",
     "react": "18.2.0",
+    "react-confetti-explosion": "^2.1.2",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
