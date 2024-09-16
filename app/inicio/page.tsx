@@ -23,7 +23,7 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <div className=" min-w-[140vw]  h-screen overflow-hidden relative flex justify-center items-center">
+    <div className=" min-w-[140vw] h-screen overflow-hidden relative flex justify-center items-center">
       <svg className="absolute w-full h-full">
         {/* Linhas conectando as estrelas */}
         <line
