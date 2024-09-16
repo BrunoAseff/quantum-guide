@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function Mock1() {
   return (
-    <div className="fixed max-w-[40vw] bottom-1/2 left-0">
+    <div className="fixed max-w-[40vw] z-50 bottom-1/2 left-0">
       <div className="flex justify-center items-center">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-2xl font-bold mb-4">量子物理学とは何ですか?</h1>
@@ -21,7 +21,7 @@ function Mock1() {
 
 function Mock2() {
   return (
-    <div className="fixed max-w-[100vw] left-[9%] top-[41%] bottom-0">
+    <div className="fixed max-w-[100vw] z-50 left-[9%] top-[41%] bottom-0">
       <div className="flex justify-center items-center">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-2xl font-bold mb-4">Receita de Bolo Quântico</h1>
@@ -45,7 +45,7 @@ function Mock2() {
 
 function Mock3() {
   return (
-    <div className="fixed max-w-[33vw] left-[8.5%] bottom-[28%]">
+    <div className="fixed z-50 max-w-[33vw] left-[8.5%] bottom-[28%]">
       <div className="flex justify-center items-center">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-2xl font-bold mb-4">
@@ -83,7 +83,7 @@ function Mock3() {
 
 function Mock4() {
   return (
-    <div className="fixed max-w-[40vw] top-[35%] left-0">
+    <div className="fixed z-50 max-w-[40vw] top-[35%] left-0">
       <div className="flex justify-center items-center">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h1 className="text-2xl font-bold mb-4">Como tudo terminou</h1>
