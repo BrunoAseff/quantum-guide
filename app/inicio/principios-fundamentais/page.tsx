@@ -6,6 +6,8 @@ import { useCallback, useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import anime from "animejs";
 import Card1 from "@/components/aulas/principios-fundamentais/Card1";
+import Card2 from "@/components/aulas/intro/Card2";
+import Card3 from "@/components/aulas/principios-fundamentais/Card3";
 
 export default function Intro() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -58,10 +60,10 @@ export default function Intro() {
           <Card1 />
         </div>
         <div className="min-w-0 flex-[0_0_100%]">
-          <Card1 />
+          <Card2 />
         </div>
         <div className="min-w-0 flex-[0_0_100%]">
-          <Card1 />
+          <Card3 />
         </div>
       </div>
 

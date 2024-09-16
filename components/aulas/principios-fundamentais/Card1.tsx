@@ -134,7 +134,7 @@ export default function Card1() {
         {isFirstAnimation ? <SinWaveAnimation /> : <ParticleAnimation />}
 
         <Button
-          className="bg-black mb-10 text-white px-4 py-2 rounded"
+          className="bg-black mb-10 mt-6 ml-auto mr-auto text-white px-4 py-2 rounded"
           onClick={toggleAnimation}
         >
           Mudar comportamento da luz
