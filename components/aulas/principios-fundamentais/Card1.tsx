@@ -114,31 +114,33 @@ export default function Card1() {
     <Card>
       <CardTitle>Dualidade onda-partícula</CardTitle>
 
-      <div className="text-gray-700 leading-relaxed space-y-4">
-        <p>Luz é onda ou partícula? A resposta é: ambos!</p>
-        <p>
-          A luz pode se comportar como uma onda, se espalhando e interferindo
-          consigo mesma, como quando você joga duas pedras em um lago e vê as
-          ondas se encontrando.
-        </p>
-
-        <p>
-          Mas, em outras situações, a luz se comporta como partículas chamadas
-          fótons, pequenas bolinhas de energia que colidem e interagem com a
-          matéria.
-        </p>
-        <p>
-          É como se a luz tivesse uma identidade dupla, dependendo de como a
-          observamos.
-        </p>
-        {isFirstAnimation ? <SinWaveAnimation /> : <ParticleAnimation />}
-
-        <Button
-          className="bg-black mb-10 mt-6 ml-auto mr-auto text-white px-4 py-2 rounded"
-          onClick={toggleAnimation}
-        >
-          Mudar comportamento da luz
-        </Button>
+      <div className="grid grid-cols-2 gap-4 text-gray-700 leading-relaxed">
+        <section>
+          <p>Luz é onda ou partícula? A resposta é: ambos!</p>
+          <p>
+            A luz pode se comportar como uma onda, se espalhando e interferindo
+            consigo mesma, como quando você joga duas pedras em um lago e vê as
+            ondas se encontrando.
+          </p>
+          <p>
+            Mas, em outras situações, a luz se comporta como partículas chamadas
+            fótons, pequenas bolinhas de energia que colidem e interagem com a
+            matéria.
+          </p>
+        </section>
+        <section>
+          <p>
+            É como se a luz tivesse uma identidade dupla, dependendo de como a
+            observamos.
+          </p>
+          {isFirstAnimation ? <SinWaveAnimation /> : <ParticleAnimation />}
+          <Button
+            className="bg-black mb-10 mt-6 ml-auto mr-auto text-white px-4 py-2 rounded"
+            onClick={toggleAnimation}
+          >
+            Mudar comportamento da luz
+          </Button>
+        </section>
       </div>
     </Card>
   );
