@@ -39,7 +39,7 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex-1 flex flex-col min-w-64 bg-white p-8 rounded-xl mix-blend-screen"
+        className="flex-1 flex flex-col min-w-64 bg-white p-8 rounded-xl mix-blend-screen "
       >
         <Logo />
 
