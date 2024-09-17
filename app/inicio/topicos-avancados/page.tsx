@@ -3,16 +3,18 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowCircleLeft, ArrowCircleRight } from "phosphor-react";
 import { useCallback, useState, useEffect, useRef } from "react";
-import Card1 from "@/components/aulas/interpretacoes/Card1";
-import Card2 from "@/components/aulas/interpretacoes/Card2";
-import Card3 from "@/components/aulas/interpretacoes/Card3";
+import Card1 from "@/components/aulas/topicos-avancados/Card1";
+import Card2 from "@/components/aulas/topicos-avancados/Card2";
+import Card3 from "@/components/aulas/topicos-avancados/Card3";
+import Card4 from "@/components/aulas/topicos-avancados/Card4";
+
 import { Button } from "@/components/ui/button";
 import anime from "animejs";
 
-export default function Interpretacoes() {
+export default function CamposForcas() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = 3;
+  const totalSlides = 4;
   const buttonRef = useRef(null);
 
   useEffect(() => {
@@ -64,6 +66,9 @@ export default function Interpretacoes() {
         </div>
         <div className="min-w-0 flex-[0_0_100%]">
           <Card3 />
+        </div>
+        <div className="min-w-0 flex-[0_0_100%]">
+          <Card4 />
         </div>
       </div>
 

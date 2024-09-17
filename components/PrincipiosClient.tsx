@@ -66,7 +66,7 @@ export default function PrincipiosClient({ email }: { email: string | null }) {
           ref={emblaRef}
         >
           <div
-            className="flex transition-height duration-500 ease-in-out
+            className="flex transition-[height] duration-500 ease-in-out
  items-start"
           >
             <div className="min-w-0  flex-[0_0_100%]">

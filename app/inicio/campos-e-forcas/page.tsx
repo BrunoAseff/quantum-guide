@@ -3,16 +3,21 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowCircleLeft, ArrowCircleRight } from "phosphor-react";
 import { useCallback, useState, useEffect, useRef } from "react";
-import Card1 from "@/components/aulas/interpretacoes/Card1";
-import Card2 from "@/components/aulas/interpretacoes/Card2";
-import Card3 from "@/components/aulas/interpretacoes/Card3";
+import Card1 from "@/components/aulas/campos-e-forcas/Card1";
+import Card2 from "@/components/aulas/campos-e-forcas/Card2";
+import Card3 from "@/components/aulas/campos-e-forcas/Card3";
+import Card4 from "@/components/aulas/campos-e-forcas/Card4";
+import Card5 from "@/components/aulas/campos-e-forcas/Card5";
+import Card6 from "@/components/aulas/campos-e-forcas/Card6";
+import Card7 from "@/components/aulas/campos-e-forcas/Card7";
+
 import { Button } from "@/components/ui/button";
 import anime from "animejs";
 
-export default function Interpretacoes() {
+export default function CamposForcas() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = 3;
+  const totalSlides = 7;
   const buttonRef = useRef(null);
 
   useEffect(() => {
@@ -64,6 +69,18 @@ export default function Interpretacoes() {
         </div>
         <div className="min-w-0 flex-[0_0_100%]">
           <Card3 />
+        </div>
+        <div className="min-w-0 flex-[0_0_100%]">
+          <Card4 />
+        </div>
+        <div className="min-w-0 flex-[0_0_100%]">
+          <Card5 />
+        </div>
+        <div className="min-w-0 flex-[0_0_100%]">
+          <Card6 />
+        </div>
+        <div className="min-w-0 flex-[0_0_100%]">
+          <Card7 />
         </div>
       </div>
 
