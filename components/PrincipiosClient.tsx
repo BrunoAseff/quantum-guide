@@ -8,6 +8,12 @@ import anime from "animejs";
 import Card1 from "@/components/aulas/principios-fundamentais/Card1";
 import Card2 from "@/components/aulas/principios-fundamentais/Card2";
 import Card3 from "@/components/aulas/principios-fundamentais/Card3";
+import Card4 from "@/components/aulas/principios-fundamentais/Card4";
+import Card5 from "@/components/aulas/principios-fundamentais/Card5";
+import Card6 from "@/components/aulas/principios-fundamentais/Card6";
+import Card7 from "@/components/aulas/principios-fundamentais/Card7";
+import Card8 from "@/components/aulas/principios-fundamentais/Card8";
+
 import { MockCards } from "@/components/aulas/principios-fundamentais/Card3";
 import { MockCardsProvider } from "@/components/aulas/principios-fundamentais/Card3";
 
@@ -70,7 +76,19 @@ export default function PrincipiosClient({ email }: { email: string | null }) {
               <Card3 />
             </div>
             <div className="min-w-0 flex-[0_0_100%]">
-              <Card1 />
+              <Card4 />
+            </div>
+            <div className="min-w-0 flex-[0_0_100%]">
+              <Card5 />
+            </div>
+            <div className="min-w-0 flex-[0_0_100%]">
+              <Card6 />
+            </div>
+            <div className="min-w-0 flex-[0_0_100%]">
+              <Card7 />
+            </div>
+            <div className="min-w-0 flex-[0_0_100%]">
+              <Card8 />
             </div>
           </div>
 
