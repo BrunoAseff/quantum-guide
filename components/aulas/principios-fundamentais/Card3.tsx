@@ -132,7 +132,7 @@ function Mock4() {
   );
 }
 
-function Mock5({ user }: { user: any }) {
+function Mock5({ user }: { user: string }) {
   if (!user) return null;
 
   return (
@@ -197,7 +197,7 @@ function Mock7() {
   );
 }
 
-export function MockCards({ user }: { user: any }) {
+export function MockCards({ user }: { user: string }) {
   const { isVisible, handleBackClick } = useMockCards();
   const [cardVisibility, setCardVisibility] = useState([
     false,

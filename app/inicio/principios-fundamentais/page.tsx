@@ -1,9 +1,10 @@
 import PrincipiosClient from "@/components/PrincipiosClient";
-
-import getEmail from "@/utils/supabase/getEmail";
+import { getUser } from "@/app/actions";
 
 export default async function Principios() {
-  const email = await getEmail();
+  const userData = await getUser();
 
-  return <PrincipiosClient email={email} />;
+  const user = userData?.name;
+
+  return <PrincipiosClient user={user} />;
 }

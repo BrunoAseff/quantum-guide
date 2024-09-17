@@ -17,7 +17,7 @@ import Card8 from "@/components/aulas/principios-fundamentais/Card8";
 import { MockCards } from "@/components/aulas/principios-fundamentais/Card3";
 import { MockCardsProvider } from "@/components/aulas/principios-fundamentais/Card3";
 
-export default function PrincipiosClient({ email }: { email: string | null }) {
+export default function PrincipiosClient({ user }: { user: string }) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 8;
@@ -115,7 +115,7 @@ export default function PrincipiosClient({ email }: { email: string | null }) {
             </div>
           )}
         </div>
-        <MockCards user={email} />
+        <MockCards user={user} />
       </div>
     </MockCardsProvider>
   );

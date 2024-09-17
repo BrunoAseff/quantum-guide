@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Adiciona a classe para aplicar o filtro de sombra */
+.hover\:filter-shadow:hover {
+  filter: url(#shadow);
+}
+
+/* Adiciona a classe para ajustar o raio no hover */
+.hover\:r-7:hover {
+  r: 7;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
