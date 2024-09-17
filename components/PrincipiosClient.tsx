@@ -20,7 +20,7 @@ import { MockCardsProvider } from "@/components/aulas/principios-fundamentais/Ca
 export default function PrincipiosClient({ email }: { email: string | null }) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = 4;
+  const totalSlides = 8;
   const buttonRef = useRef(null);
 
   useEffect(() => {
