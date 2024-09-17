@@ -65,7 +65,10 @@ export default function PrincipiosClient({ email }: { email: string | null }) {
           className="overflow-hidden text-black max-w-[50%] m-auto rounded-lg p-6 pb-1 bg-white"
           ref={emblaRef}
         >
-          <div className="flex">
+          <div
+            className="flex transition-height duration-500 ease-in-out
+ items-start"
+          >
             <div className="min-w-0  flex-[0_0_100%]">
               <Card1 />
             </div>
