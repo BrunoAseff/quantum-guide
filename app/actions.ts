@@ -5,6 +5,33 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+export async function getUser() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+
+  if (authError || !user) {
+    console.error("Error fetching user from auth:", authError);
+    return null;
+  }
+
+  const { data, error: dbError } = await supabase
+    .from("users")
+    .select("name, progress")
+    .eq("email", user.email)
+    .single();
+
+  if (dbError) {
+    console.error("Error fetching user data from users table:", dbError);
+    return null;
+  }
+
+  return data;
+}
+
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
