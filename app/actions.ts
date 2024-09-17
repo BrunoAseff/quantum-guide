@@ -8,14 +8,16 @@ import { redirect } from "next/navigation";
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
+  const name = formData.get("name")?.toString(); // Add name from formData
   const supabase = createClient();
   const origin = headers().get("origin");
 
-  if (!email || !password) {
-    return { error: "Email e senha são obrigatórios" };
+  if (!email || !password || !name) {
+    return { error: "Email, senha e nome são obrigatórios" };
   }
 
-  const { error } = await supabase.auth.signUp({
+  // Sign up the user with Supabase Auth
+  const { error: authError } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -23,16 +25,30 @@ export const signUpAction = async (formData: FormData) => {
     },
   });
 
-  if (error) {
-    console.error(error.code + " " + error.message);
-    return encodedRedirect("error", "/sign-up", error.message);
-  } else {
+  if (authError) {
+    console.error(authError.code + " " + authError.message);
+    return encodedRedirect("error", "/sign-up", authError.message);
+  }
+
+  // Insert user data into the `users` table
+  const { error: insertError } = await supabase
+    .from("users")
+    .insert([{ email, name }]); // Insert name and email into users table
+
+  if (insertError) {
+    console.error(insertError.code + " " + insertError.message);
     return encodedRedirect(
-      "success",
+      "error",
       "/sign-up",
-      "Obrigado por se cadastrar! Confira seu e-mail para obter um link de verificação."
+      "Houve um erro ao salvar seus dados. Tente novamente."
     );
   }
+
+  return encodedRedirect(
+    "success",
+    "/sign-up",
+    "Obrigado por se cadastrar! Confira seu e-mail para obter um link de verificação."
+  );
 };
 
 export const signInAction = async (formData: FormData) => {
