@@ -133,6 +133,8 @@ function Mock4() {
 }
 
 function Mock5({ user }: { user: any }) {
+  if (!user) return null;
+
   return (
     <div className="max-w-[600px] ">
       <div className="bg-white shadow-lg rounded-lg p-8">
