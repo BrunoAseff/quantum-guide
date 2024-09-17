@@ -1,4 +1,5 @@
 import { Card, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Card7() {
   return (
@@ -6,7 +7,7 @@ export default function Card7() {
       <CardTitle>Resumo</CardTitle>
 
       <div className="text-gray-700 leading-relaxed space-y-4">
-        <p>IMAGEM</p>
+        <Image src="/resumo.jpeg" width={500} height={500} alt="Resumo" />
       </div>
     </Card>
   );
