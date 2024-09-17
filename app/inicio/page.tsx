@@ -1,17 +1,10 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/server";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Progress } from "@/components/ui/progress";
+import { getUser } from "../actions";
 
-export default function ProtectedPage() {
-  const [user, setUser] = useState(null);
-  const [progress, setProgress] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
+export default async function ProtectedPage() {
   const texts = [
     { x: "8%", y: "45%", content: "Introdução" },
     { x: "18%", y: "25%", content: "Princípios Fundamentais" },
@@ -21,50 +14,31 @@ export default function ProtectedPage() {
     { x: "58%", y: "60%", content: "Tópicos Avançados" },
   ];
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const supabase = createClient();
-      const {
-        data: { user },
-        error: authError,
-      } = await supabase.auth.getUser();
+  const supabase = createClient();
 
-      if (!user || authError) {
-        router.push("/sign-in");
-        return;
-      }
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-      const { data, error: dbError } = await supabase
-        .from("users")
-        .select("name, progress")
-        .eq("email", user.email)
-        .single();
-
-      if (dbError) {
-        console.error("Error fetching user data:", dbError);
-        return;
-      }
-
-      setUser(data?.name);
-      setProgress(data?.progress || 0);
-      setLoading(false);
-    };
-
-    fetchUserData();
-  }, [router]);
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (!user) {
+    return redirect("/sign-in");
   }
+
+  const userData = await getUser();
 
   return (
     <>
-      <div className="flex flex-col gap-6">
-        <h1>Olá, {user}!</h1>
-        <h2>
-          <strong>Progresso:</strong> {progress} de 6
-        </h2>
-        <Progress value={progress} />
+      <div className="flex text-white flex-col gap-6">
+        {userData && (
+          <>
+            {" "}
+            <h1>Olá, {userData.name}!</h1>
+            <h2>
+              <strong> Progresso:</strong> {userData.progress} de 6{" "}
+            </h2>
+            <Progress value={userData.progress} />
+          </>
+        )}
       </div>
       <div className=" min-w-[140vw] h-screen overflow-hidden relative flex justify-center items-center">
         <svg className="absolute w-full h-full">
