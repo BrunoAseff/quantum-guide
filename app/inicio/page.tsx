@@ -35,18 +35,13 @@ export default async function ProtectedPage() {
           <>
             {" "}
             <h1 className="font-semibold">Olá, {userData.name}!</h1>
-            <h2>
-              <strong> Progresso:</strong> {userData.progress} de 6{" "}
-            </h2>
-            <Progress
-              className="max-w-[500px] bg-gray-200"
-              value={percentageProgress}
-            >
-              <div
-                className="h-2 bg-white"
-                style={{ width: `${percentageProgress}%` }}
-              ></div>
-            </Progress>{" "}
+            <div className="flex   flex-col gap-2">
+              {" "}
+              <h2>
+                <strong> Progresso:</strong> {userData.progress} de 6{" "}
+              </h2>
+              <Progress className="max-w-[500px]" value={percentageProgress} />
+            </div>
           </>
         )}
       </div>
