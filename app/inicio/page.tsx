@@ -26,17 +26,27 @@ export default async function ProtectedPage() {
 
   const userData = await getUser();
 
+  const percentageProgress = (userData?.progress / 6) * 100;
+
   return (
     <>
-      <div className="flex text-white flex-col gap-6">
+      <div className="flex ml-4 text-xl mt-4 text-white flex-col gap-6">
         {userData && (
           <>
             {" "}
-            <h1>Olá, {userData.name}!</h1>
+            <h1 className="font-semibold">Olá, {userData.name}!</h1>
             <h2>
               <strong> Progresso:</strong> {userData.progress} de 6{" "}
             </h2>
-            <Progress value={userData.progress} />
+            <Progress
+              className="max-w-[500px] bg-gray-200"
+              value={percentageProgress}
+            >
+              <div
+                className="h-2 bg-white"
+                style={{ width: `${percentageProgress}%` }}
+              ></div>
+            </Progress>{" "}
           </>
         )}
       </div>
