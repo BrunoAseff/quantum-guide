@@ -8,12 +8,44 @@ import Card2 from "@/components/aulas/interpretacoes/Card2";
 import Card3 from "@/components/aulas/interpretacoes/Card3";
 import { Button } from "@/components/ui/button";
 import anime from "animejs";
+import { getUser, updateProgress } from "@/app/actions";
 
 export default function Interpretacoes() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 3;
   const buttonRef = useRef(null);
+  const classNumber = 3;
+  const [isTaskFinished, setTaskFinished] = useState(false);
+  const [userData, setUserData] = useState<{
+    email: string;
+    progress: number;
+  } | null>(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const data = await getUser();
+
+      if (data && data.progress >= classNumber) {
+        setTaskFinished(true);
+      }
+      setUserData(data);
+    };
+    fetchUserData();
+  }, []);
+
+  const handleMarkAsCompleted = async () => {
+    if (userData && userData.progress < classNumber) {
+      const success = await updateProgress(
+        userData.email,
+        userData.progress,
+        classNumber
+      );
+      if (success) {
+        setTaskFinished(true);
+      }
+    }
+  };
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -78,12 +110,16 @@ export default function Interpretacoes() {
 
       {currentIndex === totalSlides - 1 && (
         <div className="flex justify-center mt-4">
-          <Button
-            ref={buttonRef}
-            className="bg-black mb-10 text-white px-4 py-2 rounded opacity-0"
-          >
-            Marcar como concluído
-          </Button>
+          {userData && userData.progress >= classNumber - 1 && (
+            <Button
+              disabled={isTaskFinished}
+              onClick={handleMarkAsCompleted}
+              ref={buttonRef}
+              className="bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
+            >
+              {isTaskFinished ? "Tarefa concluída" : "Marcar como concluído"}
+            </Button>
+          )}
         </div>
       )}
     </div>

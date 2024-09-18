@@ -5,6 +5,30 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+export async function updateProgress(
+  userEmail: string,
+  currentProgress: number,
+  classNumber: number
+) {
+  const supabase = createClient();
+
+  if (currentProgress < classNumber) {
+    const { error } = await supabase
+      .from("users")
+      .update({ progress: currentProgress + 1 })
+      .eq("email", userEmail);
+
+    if (error) {
+      console.error("Error updating user progress:", error);
+      return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
 export async function getUser() {
   const supabase = createClient();
 
@@ -20,7 +44,7 @@ export async function getUser() {
 
   const { data, error: dbError } = await supabase
     .from("users")
-    .select("name, progress")
+    .select("name, email, progress")
     .eq("email", user.email)
     .single();
 

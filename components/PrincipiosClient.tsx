@@ -16,12 +16,19 @@ import Card8 from "@/components/aulas/principios-fundamentais/Card8";
 
 import { MockCards } from "@/components/aulas/principios-fundamentais/Card3";
 import { MockCardsProvider } from "@/components/aulas/principios-fundamentais/Card3";
+import { getUser, updateProgress } from "@/app/actions";
 
 export default function PrincipiosClient({ user }: { user: string }) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTaskFinished, setTaskFinished] = useState(false);
   const totalSlides = 8;
   const buttonRef = useRef(null);
+  const classNumber = 2;
+  const [userData, setUserData] = useState<{
+    email: string;
+    progress: number;
+  } | null>(null);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -57,6 +64,31 @@ export default function PrincipiosClient({ user }: { user: string }) {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const data = await getUser();
+
+      if (data && data.progress >= classNumber) {
+        setTaskFinished(true);
+      }
+      setUserData(data);
+    };
+    fetchUserData();
+  }, []);
+
+  const handleMarkAsCompleted = async () => {
+    if (userData && userData.progress < classNumber) {
+      const success = await updateProgress(
+        userData.email,
+        userData.progress,
+        classNumber
+      );
+      if (success) {
+        setTaskFinished(true);
+      }
+    }
+  };
 
   return (
     <MockCardsProvider>
@@ -106,12 +138,18 @@ export default function PrincipiosClient({ user }: { user: string }) {
 
           {currentIndex === totalSlides - 1 && (
             <div className="flex justify-center mt-4">
-              <Button
-                ref={buttonRef}
-                className="bg-black mb-10 text-white px-4 py-2 rounded opacity-0"
-              >
-                Marcar como concluído
-              </Button>
+              {userData && userData.progress >= classNumber - 1 && (
+                <Button
+                  disabled={isTaskFinished}
+                  onClick={handleMarkAsCompleted}
+                  ref={buttonRef}
+                  className="bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
+                >
+                  {isTaskFinished
+                    ? "Tarefa concluída"
+                    : "Marcar como concluído"}
+                </Button>
+              )}
             </div>
           )}
         </div>
