@@ -11,10 +11,9 @@ import Card5 from "@/components/aulas/particulas/Card5";
 import Card6 from "@/components/aulas/particulas/Card6";
 import Card7 from "@/components/aulas/particulas/Card7";
 import Card8 from "@/components/aulas/particulas/Card8";
-
-import { Button } from "@/components/ui/button";
 import anime from "animejs";
 import { getUser, updateProgress } from "@/app/actions";
+import { MarkAsCompleteBtn } from "@/components/MarkAsCompleteBtn";
 
 export default function Particulas() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -22,6 +21,7 @@ export default function Particulas() {
   const totalSlides = 8;
   const buttonRef = useRef(null);
   const classNumber = 4;
+  const nextClassHref = "/inicio/campos-e-forcas";
   const [isTaskFinished, setTaskFinished] = useState(false);
   const [userData, setUserData] = useState<{
     email: string;
@@ -128,21 +128,18 @@ export default function Particulas() {
           <ArrowCircleRight size={32} weight="fill" />
         </button>
       </div>
-
-      {currentIndex === totalSlides - 1 && (
-        <div className="flex justify-center mt-4">
-          {userData && userData.progress >= classNumber - 1 && (
-            <Button
-              disabled={isTaskFinished}
-              onClick={handleMarkAsCompleted}
-              ref={buttonRef}
-              className="bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
-            >
-              {isTaskFinished ? "Tarefa concluída" : "Marcar como concluído"}
-            </Button>
-          )}
-        </div>
-      )}
+      <div className="w-full flex items-center justify-center">
+        {currentIndex === totalSlides - 1 && (
+          <MarkAsCompleteBtn
+            nextClassHref={nextClassHref}
+            classNumber={classNumber}
+            isTaskFinished={isTaskFinished}
+            handleMarkAsCompleted={handleMarkAsCompleted}
+            buttonRef={buttonRef}
+            userData={userData}
+          />
+        )}
+      </div>
     </div>
   );
 }

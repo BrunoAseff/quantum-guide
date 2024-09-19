@@ -9,11 +9,13 @@ import Card3 from "@/components/aulas/intro/Card3";
 import { Button } from "@/components/ui/button";
 import anime from "animejs";
 import { getUser, updateProgress } from "@/app/actions";
+import { MarkAsCompleteBtn } from "@/components/MarkAsCompleteBtn";
 
 export default function Intro() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 3;
+  const nextClassHref = "/inicio/principios-fundamentais";
   const buttonRef = useRef(null);
   const classNumber = 1;
   const [isTaskFinished, setTaskFinished] = useState(false);
@@ -109,15 +111,17 @@ export default function Intro() {
       </div>
 
       {currentIndex === totalSlides - 1 && (
-        <div className="flex justify-center mt-4">
-          <Button
-            disabled={isTaskFinished}
-            onClick={handleMarkAsCompleted}
-            ref={buttonRef}
-            className="bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
-          >
-            {isTaskFinished ? "Tarefa concluída" : "Marcar como concluído"}
-          </Button>
+        <div className="w-full flex items-center justify-center">
+          {currentIndex === totalSlides - 1 && (
+            <MarkAsCompleteBtn
+              nextClassHref={nextClassHref}
+              classNumber={classNumber}
+              isTaskFinished={isTaskFinished}
+              handleMarkAsCompleted={handleMarkAsCompleted}
+              buttonRef={buttonRef}
+              userData={userData}
+            />
+          )}
         </div>
       )}
     </div>

@@ -17,6 +17,7 @@ import Card8 from "@/components/aulas/principios-fundamentais/Card8";
 import { MockCards } from "@/components/aulas/principios-fundamentais/Card3";
 import { MockCardsProvider } from "@/components/aulas/principios-fundamentais/Card3";
 import { getUser, updateProgress } from "@/app/actions";
+import { MarkAsCompleteBtn } from "./MarkAsCompleteBtn";
 
 export default function PrincipiosClient({ user }: { user: string }) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -25,6 +26,7 @@ export default function PrincipiosClient({ user }: { user: string }) {
   const totalSlides = 8;
   const buttonRef = useRef(null);
   const classNumber = 2;
+  const nextClassHref = "/inicio/interpretacoes";
   const [userData, setUserData] = useState<{
     email: string;
     progress: number;
@@ -137,18 +139,16 @@ export default function PrincipiosClient({ user }: { user: string }) {
           </div>
 
           {currentIndex === totalSlides - 1 && (
-            <div className="flex justify-center mt-4">
-              {userData && userData.progress >= classNumber - 1 && (
-                <Button
-                  disabled={isTaskFinished}
-                  onClick={handleMarkAsCompleted}
-                  ref={buttonRef}
-                  className="bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
-                >
-                  {isTaskFinished
-                    ? "Tarefa concluída"
-                    : "Marcar como concluído"}
-                </Button>
+            <div className="w-full flex items-center justify-center">
+              {currentIndex === totalSlides - 1 && (
+                <MarkAsCompleteBtn
+                  nextClassHref={nextClassHref}
+                  classNumber={classNumber}
+                  isTaskFinished={isTaskFinished}
+                  handleMarkAsCompleted={handleMarkAsCompleted}
+                  buttonRef={buttonRef}
+                  userData={userData}
+                />
               )}
             </div>
           )}

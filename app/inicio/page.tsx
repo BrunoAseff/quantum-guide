@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Progress } from "@/components/ui/progress";
 import { getUser } from "../actions";
+import { ProgressDialog } from "@/components/progressDialog";
 
 export default async function ProtectedPage() {
   const texts = [

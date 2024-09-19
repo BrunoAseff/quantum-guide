@@ -7,10 +7,9 @@ import Card1 from "@/components/aulas/topicos-avancados/Card1";
 import Card2 from "@/components/aulas/topicos-avancados/Card2";
 import Card3 from "@/components/aulas/topicos-avancados/Card3";
 import Card4 from "@/components/aulas/topicos-avancados/Card4";
-
-import { Button } from "@/components/ui/button";
 import anime from "animejs";
 import { getUser, updateProgress } from "@/app/actions";
+import { MarkAsCompleteBtn } from "@/components/MarkAsCompleteBtn";
 
 export default function CamposForcas() {
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -18,6 +17,7 @@ export default function CamposForcas() {
   const totalSlides = 4;
   const buttonRef = useRef(null);
   const classNumber = 6;
+  const nextClassHref = "/inicio";
   const [isTaskFinished, setTaskFinished] = useState(false);
   const [userData, setUserData] = useState<{
     email: string;
@@ -114,16 +114,17 @@ export default function CamposForcas() {
       </div>
 
       {currentIndex === totalSlides - 1 && (
-        <div className="flex justify-center mt-4">
-          {userData && userData.progress >= classNumber - 1 && (
-            <Button
-              disabled={isTaskFinished}
-              onClick={handleMarkAsCompleted}
-              ref={buttonRef}
-              className="bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
-            >
-              {isTaskFinished ? "Tarefa concluída" : "Marcar como concluído"}
-            </Button>
+        <div className="w-full flex items-center justify-center">
+          {currentIndex === totalSlides - 1 && (
+            <MarkAsCompleteBtn
+              nextClassHref={nextClassHref}
+              classNumber={classNumber}
+              isTaskFinished={isTaskFinished}
+              handleMarkAsCompleted={handleMarkAsCompleted}
+              buttonRef={buttonRef}
+              userData={userData}
+              isLastClass
+            />
           )}
         </div>
       )}
