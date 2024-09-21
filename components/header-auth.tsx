@@ -6,6 +6,8 @@ import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
 import LogoutButton from "./ui/LogoutButton";
 import GoBackButton from "./ui/GoBackButton";
+import Logo from "./Logo";
+import WhiteLogo from "./WhiteLogo";
 
 export default async function AuthButton() {
   const {
@@ -48,7 +50,8 @@ export default async function AuthButton() {
   }
   return user ? (
     <div className="w-full flex text-white font-semibold text-lg items-center justify-between mt-10">
-      <h1> Olá, {user.email}!</h1>
+      <WhiteLogo />
+
       <GoBackButton />
       <form action={signOutAction}>
         <LogoutButton />
