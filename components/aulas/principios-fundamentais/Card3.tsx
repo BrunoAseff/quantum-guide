@@ -218,7 +218,7 @@ export function MockCards({ user }: { user: string }) {
             newVisibility[index] = true;
             return newVisibility;
           });
-        }, index * 100)
+        }, index * 200)
       );
 
       return () => timers.forEach((timer) => clearTimeout(timer));
@@ -230,42 +230,58 @@ export function MockCards({ user }: { user: string }) {
   return (
     <div className={`relative w-full h-screen ${isVisible ? "" : "hidden"}`}>
       <div
-        className={`absolute top-[-15%] left-0 transition-opacity duration-300 ${cardVisibility[0] ? "opacity-100" : "opacity-0"}`}
+        className={`fixed top-[5%] left-0 transition-opacity duration-300 ${
+          cardVisibility[0] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Mock1 />
       </div>
       <div
-        className={`absolute top-[-15%] right-[20%] transition-opacity duration-300 ${cardVisibility[1] ? "opacity-100" : "opacity-0"}`}
+        className={`fixed top-[5%] right-[40%] transition-opacity duration-300 ${
+          cardVisibility[1] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Mock2 />
       </div>
       <div
-        className={`absolute top-[-75%] right-0 transition-opacity duration-300 ${cardVisibility[2] ? "opacity-100" : "opacity-0"}`}
+        className={`fixed top-[24%] right-0 transition-opacity duration-300 ${
+          cardVisibility[2] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Mock3 />
       </div>
       <div
-        className={`absolute top-[-50%] left-[2%] transition-opacity duration-300 ${cardVisibility[3] ? "opacity-100" : "opacity-0"}`}
+        className={`fixed top-[55%] left-[2%] transition-opacity duration-300 ${
+          cardVisibility[3] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Mock4 />
       </div>
       <div
-        className={`absolute top-[-30%] right-[0%] transition-opacity duration-300 ${cardVisibility[4] ? "opacity-100" : "opacity-0"}`}
+        className={`fixed top-[3%] right-[1%] transition-opacity duration-300 ${
+          cardVisibility[4] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Mock5 user={user} />
       </div>
       <div
-        className={`absolute top-[-5%] right-[0%] transition-opacity duration-300 ${cardVisibility[5] ? "opacity-100" : "opacity-0"}`}
+        className={`fixed top-[70%] right-[3%] transition-opacity duration-300 ${
+          cardVisibility[5] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Mock6 />
       </div>
       <div
-        className={`absolute top-[-80%] left-[0%] transition-opacity duration-300 ${cardVisibility[6] ? "opacity-100" : "opacity-0"}`}
+        className={`fixed top-[70%] left-[40%] transition-opacity duration-300 ${
+          cardVisibility[6] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <Mock7 />
       </div>
       <div
-        className={`flex absolute left-[35%] top-[-50%]  w-[500px] justify-center items-center ${cardVisibility[3] ? "opacity-100" : "opacity-0"}`}
+        className={`flex fixed left-[35%] top-[40%] w-[500px] justify-center items-center ${
+          cardVisibility[3] ? "opacity-100" : "opacity-0"
+        }`}
       >
         <div className="bg-white border-red-600 border-2 z-50 shadow-lg rounded-lg p-8 text-center">
           <h1 className="text-2xl text-red-500 font-bold mb-4">Erro</h1>
