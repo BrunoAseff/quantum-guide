@@ -13,6 +13,7 @@ import { useState } from "react";
 import { ProgressAnimation } from "./ui/progressAnimation";
 import Link from "next/link";
 import { ArrowRight } from "phosphor-react";
+import { useRouter } from "next/navigation";
 
 interface ProgressDialogProps {
   classNumber: number;
@@ -37,15 +38,21 @@ export const MarkAsCompleteBtn: React.FC<ProgressDialogProps> = ({
   isLastClass,
 }) => {
   const [animatedProgress, setAnimatedProgress] = useState(0);
-  const newProgress = userData ? userData.progress + 1 : 0;
-  const percentageProgress = (newProgress / 6) * 100;
+  const percentageProgress = (classNumber / 6) * 100;
+  const router = useRouter();
+
   const handleDialogOpen = (isOpen: boolean) => {
+    if (isLastClass) {
+      router.push("/course-finished");
+    }
+
     if (isOpen) {
       setAnimatedProgress(0);
       const timer = setTimeout(
         () => setAnimatedProgress(percentageProgress),
         500
       );
+
       return () => clearTimeout(timer);
     }
   };
@@ -59,7 +66,7 @@ export const MarkAsCompleteBtn: React.FC<ProgressDialogProps> = ({
               disabled={isTaskFinished}
               onClick={handleMarkAsCompleted}
               ref={buttonRef}
-              className="bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
+              className="bg-black mb-10  disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
             >
               {isTaskFinished ? "Tarefa concluída" : "Marcar como concluído"}
             </Button>
@@ -71,21 +78,19 @@ export const MarkAsCompleteBtn: React.FC<ProgressDialogProps> = ({
           <DialogTitle>Progresso atualizado!</DialogTitle>
         </DialogHeader>
         <div className="my-4">
-          <h1 className="mb-1 text-lg font-semibold">{newProgress} de 6</h1>
+          <h1 className="mb-1 text-lg font-semibold">{classNumber} de 6</h1>
           <ProgressAnimation value={animatedProgress} className="w-full" />
         </div>
         <div className="flex justify-end gap-4">
           <DialogClose>
             <Button className="btn-primary">Continuar aqui</Button>
           </DialogClose>{" "}
-          {!isLastClass && (
-            <Button className="btn-primary">
-              <Link className="flex items-center gap-2" href={nextClassHref}>
-                <p> Ir para próxima aula</p>
-                <ArrowRight size={20} color="white" />
-              </Link>
-            </Button>
-          )}
+          <Button className="btn-primary">
+            <Link className="flex items-center gap-2" href={nextClassHref}>
+              <p> Ir para próxima aula</p>
+              <ArrowRight size={20} color="white" />
+            </Link>
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

@@ -121,12 +121,21 @@ export default function Particulas() {
       </div>
 
       <div className="flex gap-6 mb-10 w-full items-center justify-center mt-auto">
+        {/* Previous Slide Button */}
         <button className="rounded-full" onClick={scrollPrev}>
           <ArrowCircleLeft size={32} weight="fill" />
         </button>
-        <button className="rounded-full" onClick={scrollNext}>
-          <ArrowCircleRight size={32} weight="fill" />
-        </button>
+
+        {/* Next Slide Button */}
+        {currentIndex === totalSlides - 1 ? (
+          <button className="rounded-full opacity-20" disabled>
+            <ArrowCircleRight size={32} weight="fill" />
+          </button>
+        ) : (
+          <button className="rounded-full" onClick={scrollNext}>
+            <ArrowCircleRight size={32} weight="fill" />
+          </button>
+        )}
       </div>
       <div className="w-full flex items-center justify-center">
         {currentIndex === totalSlides - 1 && (
