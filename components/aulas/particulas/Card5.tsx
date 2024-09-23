@@ -7,21 +7,24 @@ export default function Card5() {
 
       <div className="text-gray-700 leading-relaxed space-y-4">
         <p>
-          O elétron é uma partícula subatômica que orbita o núcleo do átomo.
+          Não, elétrons não orbitam os átomos como planetas ao redor do Sol...
+          Eu sei que foi assim que você aprendeu, mas a realidade é mais
+          complexa.{" "}
         </p>
         <p>
-          Os elétrons têm carga negativa e são muito menores que os prótons e
-          nêutrons no núcleo. Eles se movem rapidamente em torno do núcleo,
-          ocupando regiões chamadas orbitais.
+          Elétrons apenas "existem" em regiões ao redor do núcleo chamadas de
+          orbitais. Nesses orbitais, não podemos saber exatamente onde um
+          elétron está em um dado momento; em vez disso, temos uma ideia das
+          regiões onde ele tem mais chances de ser encontrado.{" "}
         </p>
 
         <p>
-          A quantidade e a disposição dos elétrons determinam as propriedades
-          químicas de um átomo e como ele interage com outros átomos.
+          Resumidamente, eles são pequenas partículas que "pulam" de um lado
+          para outro, sem nunca passar pelo espaço entre eles.
         </p>
         <p>
-          Pense nos elétrons como as abelhas em torno de uma colmeia, zumbindo
-          em torno do núcleo e definindo o comportamento químico do átomo.
+          A quantidade e a disposição dos elétrons determinam as propriedades
+          químicas de um átomo e como ele interage com outros átomos.
         </p>
       </div>
     </Card>

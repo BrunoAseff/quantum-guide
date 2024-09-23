@@ -12,7 +12,7 @@ export default function Card2() {
           choque de realidade: <br />
           <br />
           <strong className="relative left-[35%] text-black">
-            Física quântica não faz sentido!
+            Física quântica não faz sentido.
           </strong>
         </p>
 

@@ -24,7 +24,7 @@ export function VortexAnimation() {
         baseHue={230}
         className="flex items-center flex-col justify-center px-2 md:px-10 py-4 w-full h-full"
       >
-        <h2 className="text-white text-2xl md:text-6xl font-bold text-center">
+        <h2 className="text-white shadow-sm text-2xl md:text-6xl font-bold text-center">
           Você terminou o guia quântico!
         </h2>
         <div className="mt-24 min-h-20">

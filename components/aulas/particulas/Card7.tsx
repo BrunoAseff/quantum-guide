@@ -26,8 +26,8 @@ export default function Card7() {
         </p>
         <p>
           Apesar de sua natureza fantasmagórica, os neutrinos são essenciais
-          para a física, ajudando-nos a entender melhor as forças fundamentais
-          do universo.
+          para a física e nos ajudam a entender melhor as forças fundamentais do
+          universo.
         </p>
       </div>
     </Card>

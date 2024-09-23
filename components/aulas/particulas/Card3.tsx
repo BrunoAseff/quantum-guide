@@ -7,23 +7,20 @@ export default function Card3() {
 
       <div className="text-gray-700 leading-relaxed space-y-4">
         <p>
-          O nêutron é uma das partículas que formam o núcleo do átomo, junto com
-          os prótons.
+          Os nêutrons também ficam no núcleo e, como o nome sugere, não têm
+          carga elétrica, sendo neutros.{" "}
         </p>
         <p>
-          Diferente dos prótons, os nêutrons não têm carga elétrica; eles são
-          neutros. Isso ajuda a manter os prótons juntos no núcleo, já que os
-          prótons, todos positivos, tendem a se repelir.
+          Eles são quase tão pesados quanto os prótons e têm um papel importante
+          na estabilidade do átomo. Em núcleos com muitos prótons, os nêutrons
+          agem como "moderadores", ajudando a reduzir a repulsão elétrica entre
+          os prótons, que têm a mesma carga e, portanto, se repelem. Sem os
+          nêutrons, o núcleo poderia se desintegrar (e nada existiria
+          consequentemente).
         </p>
-
-        <p>
-          Os nêutrons também são importantes em reações nucleares, como quando
-          um átomo se divide e libera energia.
-        </p>
-        <p>
-          Eles são como pacificadores no núcleo, ajudando a manter tudo unido e
-          funcionando.
-        </p>
+        <small className="mt-2 italic ml-auto mr-auto">
+          Já agradeceu um Nêutron hoje por estar vivo?
+        </small>
       </div>
     </Card>
   );

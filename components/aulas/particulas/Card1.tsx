@@ -21,9 +21,8 @@ export default function Card1() {
           ocupam regiões chamadas orbitais, onde é mais provável encontrá-los.
         </p>
         <p>
-          Os átomos são incrivelmente pequenos, mas se juntam para formar tudo
-          que vemos ao nosso redor, desde o ar que respiramos até as estrelas no
-          céu.
+          O curioso é que, mesmo que o átomo pareça sólido, ele é formado em sua
+          maior parte por espaço vazio.
         </p>
       </div>
     </Card>

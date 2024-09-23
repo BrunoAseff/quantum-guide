@@ -7,11 +7,11 @@ export default function Card4() {
 
       <div className="text-gray-700 leading-relaxed space-y-4">
         <p>
-          Os quarks são os tijolos fundamentais que compõem partículas maiores,
-          como prótons e nêutrons.
+          Prótons e nêutrons, por sua vez, são formados por partículas ainda
+          menores chamadas quarks.{" "}
         </p>
         <p>
-          Existem seis tipos de quarks com nomes curiosos: up, down, charm,
+          Existem seis tipos de quarks com nomes esquisitos: up, down, charm,
           strange, top e bottom. No dia a dia, encontramos principalmente os
           quarks up e down, que formam os prótons e nêutrons.
         </p>

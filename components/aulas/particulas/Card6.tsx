@@ -16,14 +16,10 @@ export default function Card6() {
         </p>
 
         <p>
-          Assim como os elétrons, os múons e taus têm carga negativa. Porém, não
-          fazem parte dos átomos comuns, pois são instáveis e se desintegram
-          rapidamente em outras partículas.
-        </p>
-        <p>
-          Pense no múon e no tau como primos pesados do elétron, existindo
-          apenas por um breve momento antes de se transformarem em algo mais
-          leve.
+          Assim como os elétrons, os múons e taus têm carga negativa. Eles
+          aparecem brevemente, mas rapidamente se desintegram em outras
+          partículas menores, e por isso, não fazem parte da matéria estável que
+          conhecemos.
         </p>
       </div>
     </Card>
