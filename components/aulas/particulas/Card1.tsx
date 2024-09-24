@@ -1,4 +1,7 @@
+"use client";
+
 import { Card, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Card1() {
   return (
@@ -24,6 +27,10 @@ export default function Card1() {
           O curioso é que, mesmo que o átomo pareça sólido, ele é formado em sua
           maior parte por espaço vazio.
         </p>
+        <div className="w-full flex justify-center">
+          {" "}
+          <Image src="/atomo.png" width={330} height={330} alt="Átomo" />
+        </div>
       </div>
     </Card>
   );

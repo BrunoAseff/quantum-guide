@@ -3,7 +3,6 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowCircleLeft, ArrowCircleRight } from "phosphor-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
 import anime from "animejs";
 import Card1 from "@/components/aulas/principios-fundamentais/Card1";
 import Card2 from "@/components/aulas/principios-fundamentais/Card2";

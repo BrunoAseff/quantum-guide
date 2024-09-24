@@ -1,4 +1,5 @@
 import { Card, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Card3() {
   return (
@@ -18,9 +19,13 @@ export default function Card3() {
           nêutrons, o núcleo poderia se desintegrar (e nada existiria
           consequentemente).
         </p>
-        <small className="mt-2 italic ml-auto mr-auto">
-          Já agradeceu um Nêutron hoje por estar vivo?
-        </small>
+        <div className="mt-2 w-full italic flex justify-center">
+          <small>Já agradeceu um Nêutron hoje por estar vivo?</small>
+        </div>
+        <div className="w-full flex justify-center">
+          {" "}
+          <Image src="/neutron.png" width={270} height={200} alt="Neutron" />
+        </div>
       </div>
     </Card>
   );

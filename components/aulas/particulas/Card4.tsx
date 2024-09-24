@@ -1,4 +1,5 @@
 import { Card, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Card4() {
   return (
@@ -25,6 +26,10 @@ export default function Card4() {
           formar as peças maiores que, por sua vez, constroem o núcleo dos
           átomos.
         </p>
+        <div className="w-full flex justify-center">
+          {" "}
+          <Image src="/quarks.png" width={270} height={200} alt="Quarks" />
+        </div>
       </div>
     </Card>
   );

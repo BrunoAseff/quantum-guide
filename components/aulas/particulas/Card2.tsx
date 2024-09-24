@@ -1,4 +1,5 @@
 import { Card, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function Card2() {
   return (
@@ -20,6 +21,10 @@ export default function Card2() {
           quantidade deles (chamada de número atômico) define as propriedades
           químicas do elemento.
         </p>
+        <div className="w-full flex justify-center">
+          {" "}
+          <Image src="/proton.png" width={270} height={200} alt="Proton" />
+        </div>
       </div>
     </Card>
   );

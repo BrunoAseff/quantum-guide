@@ -6,8 +6,8 @@ export default function Card7() {
     <Card>
       <CardTitle>Resumo</CardTitle>
 
-      <div className="text-gray-700 leading-relaxed space-y-4">
-        <Image src="/resumo.jpeg" width={500} height={500} alt="Resumo" />
+      <div className="flex justify-center">
+        <Image src="/resumo.jpeg" width={700} height={700} alt="Resumo" />
       </div>
     </Card>
   );
