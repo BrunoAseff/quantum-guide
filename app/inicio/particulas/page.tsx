@@ -93,7 +93,7 @@ export default function Particulas() {
       className="overflow-hidden text-black max-w-[50%] m-auto rounded-lg p-6 pb-1 bg-white"
       ref={emblaRef}
     >
-      <div className="flex max-h-[70vh]">
+      <div className="flex max-h-[75vh]">
         <div className="min-w-0  flex-[0_0_100%]">
           <Card1 />
         </div>
@@ -120,7 +120,7 @@ export default function Particulas() {
         </div>
       </div>
 
-      <div className="flex gap-6 mb-10 w-full items-center justify-center mt-auto">
+      <div className="flex gap-6 z-50 mb-10 w-full items-center justify-center mt-auto">
         {/* Previous Slide Button */}
         <button className="rounded-full" onClick={scrollPrev}>
           <ArrowCircleLeft size={32} weight="fill" />
