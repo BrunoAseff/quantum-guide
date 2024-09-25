@@ -27,9 +27,9 @@ export default function Card1() {
           O curioso é que, mesmo que o átomo pareça sólido, ele é formado em sua
           maior parte por espaço vazio.
         </p>
-        <div className="w-full flex justify-center">
+        <div className="w-full mt-auto flex justify-center">
           {" "}
-          <Image src="/atomo.png" width={330} height={330} alt="Átomo" />
+          <Image src="/atomo.png" width={500} height={330} alt="Átomo" />
         </div>
       </div>
     </Card>

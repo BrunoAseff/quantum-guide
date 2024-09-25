@@ -93,7 +93,7 @@ export default function Particulas() {
       className="overflow-hidden text-black max-w-[50%] m-auto rounded-lg p-6 pb-1 bg-white"
       ref={emblaRef}
     >
-      <div className="flex">
+      <div className="flex max-h-[70vh]">
         <div className="min-w-0  flex-[0_0_100%]">
           <Card1 />
         </div>

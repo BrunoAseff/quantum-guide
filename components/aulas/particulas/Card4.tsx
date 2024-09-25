@@ -28,7 +28,7 @@ export default function Card4() {
         </p>
         <div className="w-full flex justify-center">
           {" "}
-          <Image src="/quarks.png" width={270} height={200} alt="Quarks" />
+          <Image src="/quarks.png" width={220} height={200} alt="Quarks" />
         </div>
       </div>
     </Card>
