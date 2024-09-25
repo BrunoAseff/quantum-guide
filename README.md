@@ -15,6 +15,6 @@ A física quântica é frequentemente explicada de forma muito complexa, com ana
 - **TailwindCSS**
 - **Supabase**
 - **PostgreSQL**
-- **Autenticação**
-- **Redefinição e recuperação de senha**
+- **Resend**
+- **Framer Motion**
 - **Anime.js**
