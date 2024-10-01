@@ -8,20 +8,10 @@ import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { Eye, EyeSlash } from "phosphor-react";
 
 export default function Signup({ searchParams }: { searchParams: Message }) {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("As senhas não coincidem");
-      return;
-    }
 
     const formData = new FormData(e.target as HTMLFormElement);
     await signUpAction(formData);
@@ -70,56 +60,7 @@ export default function Signup({ searchParams }: { searchParams: Message }) {
             placeholder="voce@exemplo.com"
             required
           />
-          <Label className="font-semibold" htmlFor="password">
-            Senha
-          </Label>
-          <div className="relative">
-            <Input
-              className="bg-black min-w-96 text-white"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Sua senha"
-              minLength={6}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <div
-              className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? (
-                <Eye color="#fff" size={20} />
-              ) : (
-                <EyeSlash color="#fff" size={20} />
-              )}
-            </div>
-          </div>
-          <Label className="font-semibold" htmlFor="confirmPassword">
-            Confirmar senha
-          </Label>
-          <div className="relative">
-            <Input
-              className="bg-black min-w-96 text-white"
-              type={showConfirmPassword ? "text" : "password"}
-              name="confirmPassword"
-              placeholder="Confirme sua senha"
-              minLength={6}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-            <div
-              className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              {showConfirmPassword ? (
-                <Eye color="#fff" size={20} />
-              ) : (
-                <EyeSlash color="#fff" size={20} />
-              )}
-            </div>
-          </div>
+
           <SubmitButton
             className="bg-white border-2 mt-4 border-black text-black font-semibold shadow-none hover:shadow-lg hover:bg-black hover:text-white"
             pendingText="Criando conta..."
