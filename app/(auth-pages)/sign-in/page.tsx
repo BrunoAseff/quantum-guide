@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+
 export default function Login({ searchParams }: { searchParams: Message }) {
   return (
     <form className="flex-1 flex flex-col min-w-64 bg-white  p-8 rounded-xl mix-blend-screen">
@@ -26,30 +27,12 @@ export default function Login({ searchParams }: { searchParams: Message }) {
           placeholder="voce@exemplo.com"
           required
         />
-        <div className="flex justify-between items-center">
-          <Label className="font-semibold" htmlFor="password">
-            Senha
-          </Label>
-          <Link
-            className="text-xs text-foreground underline"
-            href="/forgot-password"
-          >
-            Esqueceu a senha?
-          </Link>
-        </div>
-        <Input
-          className="bg-black text-white"
-          type="password"
-          name="password"
-          placeholder="Sua senha"
-          required
-        />
         <SubmitButton
           className="bg-white border-2 border-black text-black font-semibold shadow-none hover:shadow-lg hover:bg-black hover:text-white"
           pendingText="Entrando..."
-          formAction={signInAction}
+          formAction={signInAction} // Modify this to handle magic link
         >
-          Entrar
+          Entrar com link mágico
         </SubmitButton>
         <FormMessage message={searchParams} />
       </div>
