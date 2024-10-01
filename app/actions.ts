@@ -58,21 +58,19 @@ export async function getUser() {
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
-  const password = formData.get("password")?.toString();
-  const name = formData.get("name")?.toString(); // Add name from formData
+  const name = formData.get("name")?.toString(); // Get name from formData
   const supabase = createClient();
   const origin = headers().get("origin");
 
-  if (!email || !password || !name) {
-    return { error: "Email, senha e nome são obrigatórios" };
+  if (!email || !name) {
+    return { error: "Email e nome são obrigatórios" };
   }
 
-  // Sign up the user with Supabase Auth
-  const { error: authError } = await supabase.auth.signUp({
+  // Send magic link to the user's email for sign-in
+  const { error: authError } = await supabase.auth.signInWithOtp({
     email,
-    password,
     options: {
-      emailRedirectTo: `${origin}/auth/callback`,
+      emailRedirectTo: `${origin}/auth/callback`, // Where the user will be redirected after verifying their email
     },
   });
 
@@ -81,7 +79,7 @@ export const signUpAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-up", authError.message);
   }
 
-  // Insert user data into the `users` table
+  // Optionally, insert user data into the `users` table
   const { error: insertError } = await supabase
     .from("users")
     .insert([{ email, name }]); // Insert name and email into users table
@@ -98,9 +96,10 @@ export const signUpAction = async (formData: FormData) => {
   return encodedRedirect(
     "success",
     "/verify-email",
-    "Obrigado por se cadastrar! Confira seu e-mail para obter um link de verificação."
+    "Obrigado por se cadastrar! Confira seu e-mail para obter o link mágico de verificação."
   );
 };
+
 
 export const signInAction = async (formData: FormData) => {
   const email = formData.get("email") as string;
