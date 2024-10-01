@@ -110,6 +110,7 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", "Email é obrigatório.");
   }
 
+  // Send magic link to user's email
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
@@ -122,12 +123,14 @@ export const signInAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
+  // Redirect to the verify-email page
   return encodedRedirect(
     "success",
-    "/check-email",
-    "Confira seu email para o link de acesso."
+    "/verify-email",
+    "Um link de acesso foi enviado para o seu e-mail. Verifique sua caixa de entrada."
   );
 };
+
 
 
 export const forgotPasswordAction = async (formData: FormData) => {
