@@ -102,21 +102,33 @@ export const signUpAction = async (formData: FormData) => {
 
 
 export const signInAction = async (formData: FormData) => {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+  const email = formData.get("email")?.toString();
   const supabase = createClient();
+  const origin = headers().get("origin");
 
-  const { error } = await supabase.auth.signInWithPassword({
+  if (!email) {
+    return encodedRedirect("error", "/sign-in", "Email é obrigatório.");
+  }
+
+  const { error } = await supabase.auth.signInWithOtp({
     email,
-    password,
+    options: {
+      emailRedirectTo: `${origin}/auth/callback`, // Redirect after email verification
+    },
   });
 
   if (error) {
+    console.error(error.message);
     return encodedRedirect("error", "/sign-in", error.message);
   }
 
-  return redirect("/inicio");
+  return encodedRedirect(
+    "success",
+    "/check-email",
+    "Confira seu email para o link de acesso."
+  );
 };
+
 
 export const forgotPasswordAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
