@@ -1,10 +1,12 @@
-import { createClient } from "@/utils/supabase/server";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { Progress } from "@/components/ui/progress";
-import { getUser } from "../actions";
+"use client";
 
-export default async function ProtectedPage() {
+import Link from "next/link";
+import { Progress } from "@/components/ui/progress";
+import { useEffect, useState } from "react";
+
+export default function MainPage() {
+  const [progress, setProgress] = useState<number>(0);
+
   const texts = [
     { x: "8%", y: "35%", content: "Introdução" },
     { x: "18%", y: "1%", content: "Princípios Fundamentais" },
@@ -14,39 +16,33 @@ export default async function ProtectedPage() {
     { x: "58%", y: "50%", content: "Tópicos Avançados" },
   ];
 
-  const supabase = createClient();
+  useEffect(() => {
+    const initializeUser = async () => {
+      const localProgress = localStorage.getItem("quantumProgress");
+      if (localProgress) {
+        setProgress(parseInt(localProgress));
+      }
+    };
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    initializeUser();
+  }, []);
 
-  if (!user) {
-    return redirect("/sign-in");
-  }
-
-  const userData = await getUser();
-
-  const percentageProgress = (userData?.progress / 6) * 100;
+  // Calculate percentage for progress bar
+  const percentageProgress = (progress / 6) * 100;
 
   return (
     <>
       <div className="flex ml-20 text-xl mt-4 text-white flex-col gap-6">
-        {userData && (
-          <>
-            {" "}
-            <h1 className="font-semibold">Olá, {userData.name}!</h1>
-            <div className="flex   flex-col gap-2">
-              {" "}
-              <h2>
-                <strong> Progresso:</strong> {userData.progress} de 6{" "}
-              </h2>
-              <Progress className="max-w-[500px]" value={percentageProgress} />
-            </div>
-          </>
-        )}
+        <div className="flex flex-col gap-2">
+          <h2>
+            <strong>Seu Progresso:</strong> {progress} de 6
+          </h2>
+          <Progress className="max-w-[500px]" value={percentageProgress} />
+        </div>
       </div>
-      <div className=" min-w-[140vw] min-h-[60vh] overflow-hidden relative">
-        <svg className="absolute  w-full h-full">
+      {/* Rest of your SVG code remains the same */}
+      <div className="min-w-[140vw] min-h-[60vh] overflow-hidden relative">
+        <svg className="absolute w-full h-full">
           <line
             x1="10%"
             y1="30%"
@@ -84,13 +80,11 @@ export default async function ProtectedPage() {
           />
         </svg>
         <svg className="absolute w-full h-full">
-          {/* Definição de filtro para sombra */}
           <defs>
             <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
               <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="white" />
             </filter>
           </defs>
-          {/* Estrelas */}
           <Link href="/inicio/intro">
             <circle
               cx="10%"

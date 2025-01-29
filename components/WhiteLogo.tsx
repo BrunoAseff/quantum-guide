@@ -39,7 +39,7 @@ export default function WhiteLogo() {
           </clipPath>{" "}
         </defs>{" "}
       </svg>
-      <h1 className="ml-4 font-extrabold">Guia Quântico</h1>
+      <h1 className="ml-4 font-extrabold text-white">Guia Quântico</h1>
     </div>
   );
 }

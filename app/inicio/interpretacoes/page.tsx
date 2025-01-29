@@ -1,18 +1,23 @@
 "use client";
 
-import useEmblaCarousel from "embla-carousel-react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowCircleLeft, ArrowCircleRight } from "phosphor-react";
-import { useCallback, useState, useEffect, useRef } from "react";
-import Card1 from "@/components/aulas/interpretacoes/Card1";
-import Card2 from "@/components/aulas/interpretacoes/Card2";
-import Card3 from "@/components/aulas/interpretacoes/Card3";
-import { Button } from "@/components/ui/button";
 import anime from "animejs";
 import { getUser, updateProgress } from "@/app/actions";
 import { MarkAsCompleteBtn } from "@/components/MarkAsCompleteBtn";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import Card1 from "@/components/aulas/interpretacoes/Card1";
+import Card2 from "@/components/aulas/interpretacoes/Card2";
+import Card3 from "@/components/aulas/interpretacoes/Card3";
+import AutoHeight from "embla-carousel-auto-height";
 
 export default function Interpretacoes() {
-  const [emblaRef, emblaApi] = useEmblaCarousel();
+  const [api, setApi] = useState<CarouselApi>();
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalSlides = 3;
   const buttonRef = useRef(null);
@@ -25,16 +30,41 @@ export default function Interpretacoes() {
   } | null>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const data = await getUser();
+    if (!api) {
+      return;
+    }
 
-      if (data && data.progress >= classNumber) {
-        setTaskFinished(true);
+    api.on("select", () => {
+      setCurrentIndex(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const data = await getUser();
+        if (data && data.progress >= classNumber) {
+          setTaskFinished(true);
+        }
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
-      setUserData(data);
     };
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    if (currentIndex === totalSlides - 1 && buttonRef.current) {
+      anime({
+        targets: buttonRef.current,
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 500,
+        easing: "easeOutExpo",
+      });
+    }
+  }, [currentIndex]);
 
   const handleMarkAsCompleted = async () => {
     if (userData && userData.progress < classNumber) {
@@ -49,79 +79,56 @@ export default function Interpretacoes() {
     }
   };
 
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    const onSelect = () => {
-      setCurrentIndex(emblaApi.selectedScrollSnap());
-    };
-
-    emblaApi.on("select", onSelect);
-    onSelect();
-
-    return () => {
-      emblaApi.off("select", onSelect);
-    };
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (currentIndex === totalSlides - 1 && buttonRef.current) {
-      anime({
-        targets: buttonRef.current,
-        opacity: [0, 1],
-        translateY: [20, 0],
-        duration: 500,
-        easing: "easeOutExpo",
-      });
-    }
-  }, [currentIndex]);
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-
   return (
-    <div
-      className="overflow-hidden text-black max-w-[50%] m-auto rounded-lg p-6 pb-1 bg-white"
-      ref={emblaRef}
-    >
-      <div className="flex">
-        <div className="min-w-0  flex-[0_0_100%]">
-          <Card1 />
-        </div>
-        <div className="min-w-0 flex-[0_0_100%]">
-          <Card2 />
-        </div>
-        <div className="min-w-0 flex-[0_0_100%]">
-          <Card3 />
-        </div>
-      </div>
+    <div className="overflow-hidden text-black max-w-[50%] m-auto rounded-lg p-6 pb-1 bg-white">
+      <Carousel
+        plugins={[AutoHeight()]}
+        opts={{
+          align: "start",
+          loop: false,
+        }}
+        setApi={setApi}
+      >
+        <CarouselContent>
+          <CarouselItem>
+            <Card1 />
+          </CarouselItem>
+          <CarouselItem>
+            <Card2 />
+          </CarouselItem>
+          <CarouselItem>
+            <Card3 />
+          </CarouselItem>
+        </CarouselContent>
 
-      <div className="flex gap-6 mb-10 w-full items-center justify-center mt-auto">
-        {/* Previous Slide Button */}
-        <button className="rounded-full" onClick={scrollPrev}>
-          <ArrowCircleLeft size={32} weight="fill" />
-        </button>
-
-        {/* Next Slide Button */}
-        {currentIndex === totalSlides - 1 ? (
-          <button className="rounded-full opacity-20" disabled>
-            <ArrowCircleRight size={32} weight="fill" />
+        <div className="flex gap-6 mb-10 w-full items-center justify-center mt-auto">
+          <button
+            className="rounded-full"
+            onClick={() => api?.scrollPrev()}
+            disabled={currentIndex === 0}
+          >
+            <ArrowCircleLeft
+              size={32}
+              weight="fill"
+              className={currentIndex === 0 ? "opacity-20" : ""}
+            />
           </button>
-        ) : (
-          <button className="rounded-full" onClick={scrollNext}>
-            <ArrowCircleRight size={32} weight="fill" />
-          </button>
-        )}
-      </div>
 
-      {currentIndex === totalSlides - 1 && (
-        <div className="w-full flex items-center justify-center">
-          {currentIndex === totalSlides - 1 && (
+          <button
+            className="rounded-full"
+            onClick={() => api?.scrollNext()}
+            disabled={currentIndex === totalSlides - 1}
+          >
+            <ArrowCircleRight
+              size={32}
+              weight="fill"
+              className={currentIndex === totalSlides - 1 ? "opacity-20" : ""}
+            />
+          </button>
+        </div>
+
+        {currentIndex === totalSlides - 1 && (
+          <div className="w-full flex items-center justify-center">
             <MarkAsCompleteBtn
               nextClassHref={nextClassHref}
               classNumber={classNumber}
@@ -130,9 +137,9 @@ export default function Interpretacoes() {
               buttonRef={buttonRef}
               userData={userData}
             />
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </Carousel>
     </div>
   );
 }

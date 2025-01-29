@@ -5,6 +5,14 @@ import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+export async function checkUserSession() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+}
+
 export async function updateProgress(
   userEmail: string,
   currentProgress: number,
@@ -76,7 +84,7 @@ export const signUpAction = async (formData: FormData) => {
 
   if (authError) {
     console.error(authError.code + " " + authError.message);
-    return encodedRedirect("error", "/sign-up", authError.message);
+    return encodedRedirect("error", "/inicio", authError.message);
   }
 
   // Optionally, insert user data into the `users` table
@@ -88,7 +96,7 @@ export const signUpAction = async (formData: FormData) => {
     console.error(insertError.code + " " + insertError.message);
     return encodedRedirect(
       "error",
-      "/sign-up",
+      "/inicio",
       "Houve um erro ao salvar seus dados. Tente novamente."
     );
   }
@@ -99,7 +107,6 @@ export const signUpAction = async (formData: FormData) => {
     "Obrigado por se cadastrar! Confira seu e-mail para obter o link mágico de verificação."
   );
 };
-
 
 export const signInAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -130,8 +137,6 @@ export const signInAction = async (formData: FormData) => {
     "Um link de acesso foi enviado para o seu e-mail. Verifique sua caixa de entrada."
   );
 };
-
-
 
 export const forgotPasswordAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();

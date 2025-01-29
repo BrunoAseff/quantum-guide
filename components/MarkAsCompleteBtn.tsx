@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProgressAnimation } from "./ui/progressAnimation";
 import Link from "next/link";
 import { ArrowRight } from "phosphor-react";
@@ -38,8 +38,30 @@ export const MarkAsCompleteBtn: React.FC<ProgressDialogProps> = ({
   isLastClass,
 }) => {
   const [animatedProgress, setAnimatedProgress] = useState(0);
+  const [localProgress, setLocalProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const percentageProgress = (classNumber / 6) * 100;
   const router = useRouter();
+
+  useEffect(() => {
+    // Initialize local progress from localStorage
+    const storedProgress = localStorage.getItem("quantumProgress");
+    setLocalProgress(storedProgress ? parseInt(storedProgress) : 0);
+
+    // Show the button after a small delay
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleLocalProgress = () => {
+    const currentProgress = localStorage.getItem("quantumProgress");
+    const newProgress = Math.max(
+      classNumber,
+      currentProgress ? parseInt(currentProgress) : 0
+    );
+    localStorage.setItem("quantumProgress", newProgress.toString());
+    setLocalProgress(newProgress);
+  };
 
   const handleDialogOpen = (isOpen: boolean) => {
     if (isLastClass) {
@@ -57,21 +79,39 @@ export const MarkAsCompleteBtn: React.FC<ProgressDialogProps> = ({
     }
   };
 
+  const isButtonDisabled = userData
+    ? isTaskFinished
+    : localProgress >= classNumber;
+
+  const handleClick = () => {
+    if (userData) {
+      handleMarkAsCompleted();
+    } else {
+      handleLocalProgress();
+    }
+  };
+
+  const canShowButton = userData
+    ? userData.progress >= classNumber - 1
+    : localProgress >= classNumber - 1 || classNumber === 1;
+
   return (
     <Dialog onOpenChange={handleDialogOpen}>
       <DialogTrigger className="z-50">
         <div className="flex justify-center mt-4">
-          {userData && userData.progress >= classNumber - 1 && (
+          {canShowButton && (
             <Button
-              disabled={isTaskFinished}
-              onClick={handleMarkAsCompleted}
+              disabled={isButtonDisabled}
+              onClick={handleClick}
               ref={buttonRef}
-              className="bg-black mb-10  disabled:bg-zinc-800 text-white px-4 py-2 rounded opacity-0"
+              className={`bg-black mb-10 disabled:bg-zinc-800 text-white px-4 py-2 rounded transition-opacity duration-300 ${
+                isVisible ? "opacity-100" : "opacity-0"
+              }`}
             >
-              {isTaskFinished ? "Tarefa concluída" : "Marcar como concluído"}
+              {isButtonDisabled ? "Tarefa concluída" : "Marcar como concluído"}
             </Button>
           )}
-        </div>{" "}
+        </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -84,10 +124,10 @@ export const MarkAsCompleteBtn: React.FC<ProgressDialogProps> = ({
         <div className="flex justify-end gap-4">
           <DialogClose>
             <Button className="btn-primary">Continuar aqui</Button>
-          </DialogClose>{" "}
+          </DialogClose>
           <Button className="btn-primary">
             <Link className="flex items-center gap-2" href={nextClassHref}>
-              <p> Ir para próxima aula</p>
+              <p>Ir para próxima aula</p>
               <ArrowRight size={20} color="white" />
             </Link>
           </Button>

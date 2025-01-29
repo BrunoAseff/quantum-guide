@@ -1,6 +1,4 @@
-import { EnvVarWarning } from "@/components/env-var-warning";
-import HeaderAuth from "@/components/header-auth";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
+import Header from "@/components/header-auth";
 import { Zen_Maru_Gothic } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
@@ -39,7 +37,7 @@ export default function RootLayout({
             <div className="flex-1 w-full flex flex-col gap-6 items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
                 <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-                  {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
+                  <Header />
                 </div>
               </nav>
               <div className="flex flex-col gap-20 max-w-full p-5">

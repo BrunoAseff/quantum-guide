@@ -7,7 +7,7 @@ export default function Card7() {
       <CardTitle>Resumo</CardTitle>
 
       <div className="flex justify-center">
-        <Image src="/resumo.jpeg" width={700} height={700} alt="Resumo" />
+        <Image src="/resumo.jpeg" width={700} height={100} alt="Resumo" />
       </div>
     </Card>
   );
